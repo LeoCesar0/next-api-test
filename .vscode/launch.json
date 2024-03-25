@@ -7,12 +7,15 @@
         "request": "launch",
         "runtimeExecutable": "pnpm",
         "runtimeArgs": [
-          "test:debug"
+          "test:inspect",
+          "--watch"
         ],
         "console": "integratedTerminal",
         "internalConsoleOptions": "neverOpen",
         "skipFiles": [
-            "<node_internals>/**"
+            "<node_internals>/**",
+            "**/extensions/**/*.js",
+            "**/node_modules/**/*.js"
         ]
       }
     ]
