@@ -53,23 +53,40 @@ const HomePage: NextPage = () => {
         <h1 className="text-6xl">Welcome Wendel</h1>
         <h3>Upload the testing PDF in public folder</h3>
         <div>
-          <input
-            multiple
-            accept=".pdf"
-            type="file"
-            name="file"
-            onChange={(e) => {
-              handleUpload(e);
-            }}
-          />
+          {result && (
+            <>
+              <div className="text-center" >
+                <p className="mb-3" >File Uploaded!</p>
+                <button
+                  onClick={() => {
+                    setResult(undefined);
+                  }}
+                  className="bg-green-600 px-4 py-2 rounded-md"
+                >
+                  Redo
+                </button>
+              </div>
+            </>
+          )}
+          {!result && (
+            <input
+              multiple
+              accept=".pdf"
+              type="file"
+              name="file"
+              onChange={(e) => {
+                handleUpload(e);
+              }}
+            />
+          )}
         </div>
-        <div className='grid grid-cols-2 gap-4 justify-between mt-4' >
+        <div className="grid grid-cols-2 gap-4 justify-between mt-4">
           <div className="border rounded-lg p-4 bg-green-900">
-            <p className="border-b border-gray-400" >Resposta do Upload:</p>
+            <p className="border-b border-gray-400">Resposta do Upload:</p>
             <pre>{JSON.stringify(result, null, 2)}</pre>
           </div>
           <div className="border rounded-lg p-4 bg-green-900">
-            <p className="border-b border-gray-400" >Reports DataBase:</p>
+            <p className="border-b border-gray-400">Reports DataBase:</p>
             <pre>{JSON.stringify(reports, null, 2)}</pre>
           </div>
         </div>
