@@ -1,0 +1,73 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* ------------------------------- ROOT COLORS ------------------------------ */
+    --deposit: theme(colors.blue.600);
+    --debit: theme(colors.red.500);
+    --menu-width: 300px;
+    --menu-closed-width: 4rem;
+
+    /* ------------------------------- LIGHT THEME ------------------------------ */
+    --background: hsl(0 0% 100%);
+    --foreground: hsl(240 10% 3.9%);
+    --card: hsl(0 0% 100%);
+    --card-foreground: hsl(240 10% 3.9%);
+    --popover: hsl(0 0% 100%);
+    --popover-foreground: hsl(240 10% 3.9%);
+    --primary: hsl(346.8 77.2% 49.8%);
+    --primary-foreground: hsl(355.7 100% 97.3%);
+    --secondary: hsl(240 4.8% 95.9%);
+    --secondary-foreground: hsl(240 5.9% 10%);
+    --surface: #181818;
+    --surface-foreground: var(--foreground);
+    --muted: hsl(240 4.8% 95.9%);
+    --muted-foreground: hsl(240 3.8% 46.1%);
+    --accent: hsl(240 4.8% 95.9%);
+    --accent-foreground: hsl(240 5.9% 10%);
+    --destructive: hsl(0 84.2% 60.2%);
+    --destructive-foreground: hsl(0 0% 98%);
+    /* --border: 240 5.9% 90%; */
+    --border: hsl(240 5.9% 90%);
+    --input: var(--border);
+    --ring: var(--primary);
+    --radius: 0.5rem;
+  }
+
+  /* ------------------------------- DARK THEME ------------------------------- */
+
+  .dark {
+    --background: theme(colors.stone.950);
+    --foreground: theme(colors.stone.300);
+    --card: theme(colors.stone.900);
+    --card-foreground: theme(colors.stone.300);
+    --popover: hsl(0 0% 9%);
+    --popover-foreground: hsl(0 0% 95%);
+    --primary: hsl(346.8 77.2% 49.8%);
+    --primary-foreground: hsl(346.8 0% 80%);
+    --secondary: theme(colors.stone.800);
+    --secondary-foreground: theme(colors.stone.300);
+    --surface: theme(colors.stone.900);
+    --surface-foreground: var(--foreground);
+    --muted: theme(colors.zinc.900);
+    --muted-foreground: theme(colors.zinc.400);
+    --accent: hsl(12 6.5% 15.1%);
+    --accent-foreground: hsl(0 0% 98%);
+    --destructive: hsl(0 62.8% 30.6%);
+    --destructive-foreground: hsl(0 85.7% 97.3%);
+    --border: theme(colors.zinc.600/0.5);
+    --input: var(--border);
+    --ring: hsl(346.8 75% 48%);
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+}

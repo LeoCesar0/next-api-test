@@ -1,0 +1,40 @@
+
+*,
+*::after,
+*::before {
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 16px;
+}
+
+/* ---------------------------------- RESET --------------------------------- */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none !important;
+  margin: 0 !important;
+}
+input[type="number"] {
+  -moz-appearance: textfield !important;
+}
+
+tbody{
+  vertical-align: top;
+}
+
+/* ---------------------------------- UTILS --------------------------------- */
+
+.flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.box-shadow {
+  box-shadow: 0 2rem 3rem rgba(0, 0, 0, 0.4);
+}
+
+.neo-pressed-1 {
+  box-shadow: inset 20px 20px 43px var(--background), inset -20px -20px 43px var(--border);
+}
