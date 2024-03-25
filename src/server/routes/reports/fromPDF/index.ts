@@ -6,11 +6,11 @@ import { ReportsService } from "@/server/services/reports";
 import { Report } from "@/@types/report";
 import { MyBankParser } from "@/server/services/reports/parsers/MyBank";
 
-export type PDF2JSONResponse = AppModelResponse<Report[]>;
+export type ReadPDFResponse = AppModelResponse<Report[]>;
 
-export const readPdfFilesRoute = async (
+export const reportFromPDF = async (
   req: NextApiRequest,
-  res: NextApiResponse<PDF2JSONResponse>
+  res: NextApiResponse<ReadPDFResponse>
 ) => {
   const form = formidable({ multiples: true });
 
@@ -23,7 +23,7 @@ export const readPdfFilesRoute = async (
       // --------------------------
 
       if (!bankAccountId) {
-        const response: PDF2JSONResponse = {
+        const response: ReadPDFResponse = {
           error: { message: EXCEPTIONS.NO_BANK_ACCOUNT_ID },
           done: false,
           data: null,
@@ -35,7 +35,7 @@ export const readPdfFilesRoute = async (
       const reportsService = new ReportsService();
 
       if (err) {
-        const response: PDF2JSONResponse = {
+        const response: ReadPDFResponse = {
           error: { message: EXCEPTIONS.ERROR_READING_PDF },
           done: false,
           data: null,
@@ -72,7 +72,7 @@ export const readPdfFilesRoute = async (
       const findValid = parsedReports.find((report) => report.id);
 
       if (!parsedReports || !findValid) {
-        const response: PDF2JSONResponse = {
+        const response: ReadPDFResponse = {
           error: { message: EXCEPTIONS.INVALID_PDF },
           done: false,
           data: null,
