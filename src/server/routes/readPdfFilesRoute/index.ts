@@ -57,6 +57,7 @@ export const readPdfFilesRoute = async (
       // PARSE DATA
       // --------------------------
       const parser = new MyBankParser();
+      // COULD BE ANOTHER BANK IN A REAL SCENARIO
 
       const parsedReports = await reportsService.parsePDFs(parser, bankAccountId);
 

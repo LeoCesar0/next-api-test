@@ -15,9 +15,8 @@ export class ReportsService {
   rawData: IPDFRawData[] | null = null;
   parsedData: Report[] | null = null;
 
-  async create(report: Omit<Report, "id">) {
-    const id = randomUUID();
-    const data = { ...report, id };
+  async create(report: Report) {
+    const data = { ...report };
     await writeJSONData(data, "reports.ndjson");
   }
   async getById(id: string) {

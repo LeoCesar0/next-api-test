@@ -65,11 +65,11 @@ const HomePage: NextPage = () => {
         </div>
         <div className='grid grid-cols-2 gap-4 justify-between mt-4' >
           <div className="border rounded-lg p-4 bg-green-900">
-            <p className="border-b border-gray-400" >Resposta PDF:</p>
+            <p className="border-b border-gray-400" >Resposta do Upload:</p>
             <pre>{JSON.stringify(result, null, 2)}</pre>
           </div>
           <div className="border rounded-lg p-4 bg-green-900">
-            <p className="border-b border-gray-400" >Reports:</p>
+            <p className="border-b border-gray-400" >Reports DataBase:</p>
             <pre>{JSON.stringify(reports, null, 2)}</pre>
           </div>
         </div>
