@@ -1,4 +1,4 @@
-import { TEST_BANK } from "@/db/bankAccountsDB";
+import { TEST_BANK } from "@/static/testData";
 import { readFiles } from "@/utils/readFiles";
 import type { NextPage } from "next";
 import { ChangeEvent, useEffect, useState } from "react";

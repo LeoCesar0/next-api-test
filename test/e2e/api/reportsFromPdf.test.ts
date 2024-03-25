@@ -1,4 +1,4 @@
-import { TEST_BANK } from "@/db/bankAccountsDB";
+import { TEST_BANK } from "@/static/testData";
 import "isomorphic-fetch";
 import "isomorphic-form-data";
 
