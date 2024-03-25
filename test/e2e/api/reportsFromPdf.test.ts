@@ -62,7 +62,7 @@ describe("Create transactions report from PDF file", () => {
     // --------------------------
     // FINAL RESULT
     // --------------------------
-    describe("api return", () => {
+    describe("api result", () => {
       const expectedResult = {
         data: [
           {
