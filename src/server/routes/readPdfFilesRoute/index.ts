@@ -32,7 +32,7 @@ export const readPdfFilesRoute = async (
         reject(response);
       }
 
-      const reportsService = new ReportsService({ bankAccountId });
+      const reportsService = new ReportsService();
 
       if (err) {
         const response: PDF2JSONResponse = {
@@ -58,7 +58,7 @@ export const readPdfFilesRoute = async (
       // --------------------------
       const parser = new MyBankParser();
 
-      const parsedReports = await reportsService.parsePDFs(parser);
+      const parsedReports = await reportsService.parsePDFs(parser, bankAccountId);
 
       // --------------------------
       // PROCESS DATA
