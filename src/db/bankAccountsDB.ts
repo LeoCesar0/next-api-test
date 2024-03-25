@@ -5,4 +5,3 @@ export const TEST_BANK: BankAccount = {
   id: "123ab",
 };
 
-export const BANK_ACCOUNTS_DB: BankAccount[] = [TEST_BANK];

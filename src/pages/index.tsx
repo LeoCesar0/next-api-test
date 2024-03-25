@@ -1,10 +1,26 @@
 import { TEST_BANK } from "@/db/bankAccountsDB";
 import { readFiles } from "@/utils/readFiles";
 import type { NextPage } from "next";
-import { ChangeEvent, useState } from "react";
+import { ChangeEvent, useEffect, useState } from "react";
 
 const HomePage: NextPage = () => {
   const [result, setResult] = useState();
+  const [reports, setReports] = useState([]);
+
+  const fetchReports = async () => {
+    try {
+      const response = await fetch("/api/reports");
+      const result = await response.json();
+      console.log("REPORTS", result);
+      setReports(result.data);
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
+  useEffect(() => {
+    fetchReports();
+  }, []);
 
   const handleUpload = async (e: ChangeEvent<HTMLInputElement>) => {
     try {
@@ -17,12 +33,14 @@ const HomePage: NextPage = () => {
       });
 
       formData.append("bankAccountId", TEST_BANK.id);
-      const response = await fetch("/api/report/from-pdf", {
+      const response = await fetch("/api/reports/from-pdf", {
         method: "POST",
         body: formData,
       });
       const result_ = await response.json();
       setResult(result_);
+
+      await fetchReports();
     } catch (err) {
       console.error(err);
       setResult(undefined);
@@ -45,9 +63,15 @@ const HomePage: NextPage = () => {
             }}
           />
         </div>
-        <div className='mt-4' >
-        <p>RESPOSTA:</p>
-        <pre>{JSON.stringify(result, null, 2)}</pre>
+        <div className='grid grid-cols-2 gap-4 justify-between mt-4' >
+          <div className="border rounded-lg p-4 bg-green-900">
+            <p className="border-b border-gray-400" >Resposta PDF:</p>
+            <pre>{JSON.stringify(result, null, 2)}</pre>
+          </div>
+          <div className="border rounded-lg p-4 bg-green-900">
+            <p className="border-b border-gray-400" >Reports:</p>
+            <pre>{JSON.stringify(reports, null, 2)}</pre>
+          </div>
         </div>
       </form>
     </>

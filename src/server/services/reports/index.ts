@@ -1,10 +1,11 @@
 import { Report } from "@/@types/report";
-import { REPORTS_DB } from "@/db/reportsDB";
 import { randomUUID } from "crypto";
 import formidable from "formidable";
 import { getPDFRawData } from "./getPDFRawData";
 import { IPDFRawData } from "./rawDataTypes";
 import { PDFParser } from "./parsers/@types";
+import { writeJSONData } from "@/utils/writeJSONdata";
+import { readJSONData } from "@/utils/readJSONdata";
 
 interface ReadFromPDFs {
   files: formidable.File[];
@@ -13,19 +14,21 @@ interface ReadFromPDFs {
 export class ReportsService {
   rawData: IPDFRawData[] | null = null;
   parsedData: Report[] | null = null;
-  bankAccountId: string;
 
-  constructor({ bankAccountId }: { bankAccountId: string }) {
-    this.bankAccountId = bankAccountId;
-  }
-
-  create = async (report: Omit<Report, "id">) => {
+  async create(report: Omit<Report, "id">) {
     const id = randomUUID();
-    REPORTS_DB.push({ ...report, id });
-  };
-  getById = async (id: string) => {
-    return REPORTS_DB.find((item) => item.id === id);
-  };
+    const data = { ...report, id };
+    await writeJSONData(data, "reports.ndjson");
+  }
+  async getById(id: string) {
+    const reports = await readJSONData("reports.ndjson");
+    if (!reports) return undefined;
+    return reports.find((report: Report) => report.id === id);
+  }
+  async getAll() {
+    const reports = await readJSONData("reports.ndjson");
+    return (reports || []) as Report[]
+  }
   async readFromPDFs({ files }: ReadFromPDFs): Promise<IPDFRawData[]> {
     const filePromises: Promise<IPDFRawData | null>[] = [];
 
@@ -42,11 +45,11 @@ export class ReportsService {
 
     return this.rawData;
   }
-  async parsePDFs(parser: PDFParser) {
+  async parsePDFs(parser: PDFParser, bankAccountId: string) {
     if (!this.rawData) {
       throw new Error("No PDF data to parse");
     }
-    this.parsedData = parser.parse(this.rawData, this.bankAccountId);
+    this.parsedData = parser.parse(this.rawData, bankAccountId);
     return this.parsedData;
   }
   async processPDFs() {

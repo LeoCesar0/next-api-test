@@ -3,7 +3,7 @@ import "isomorphic-fetch";
 import "isomorphic-form-data";
 
 describe("Create transactions report from PDF file", () => {
-  // SHOULD FETCH WITH METHOD POST TO /report/from-pdf
+  // SHOULD FETCH WITH METHOD POST TO /reports/from-pdf
   // UPLOADING ONE OR MULTIPLE PFDs (EACH PDF INCLUDES TRANSACTIONS IN A SPECIFIC BANK ACCOUNT'S PDF FORMAT)
   // EXTRACT DATA AND CREATE A REPORT OF THE TRANSACTIONS, ACCORDING TO THE ```REPORT``` INTERFACE DECLARED IN src/@types/report.ts
 
